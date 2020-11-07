@@ -20,7 +20,9 @@ func main() {
 	fmt.Println(sdX)
 
 	cov, _ := series.calculateCoVariance()
+	corr, _ := series.calculateCorrelation()
 
 	fmt.Println("Covariance ", cov)
+	fmt.Println("Correlation ", corr)
 
 }

@@ -31,6 +31,11 @@ func (d Dataseries) calculateCoVariance() (float32, error) {
 	return covariance, nil
 }
 
-//func (d Dataseries) calculateCorrelation() float32 {
-
-//}
+func (d Dataseries) calculateCorrelation() (float32, error) {
+	cov, err := d.calculateCoVariance()
+	if err != nil {
+		return -1, errors.New("Unable to calculate correlation if slice length of both variables not equal")
+	}
+	corr := (cov / (d.x.calculateSd() * d.y.calculateSd()))
+	return corr, nil // implementing CORREL
+}
