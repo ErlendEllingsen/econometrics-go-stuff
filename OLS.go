@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"math"
 )
 
@@ -53,7 +54,7 @@ func (ols OLS) estimateY(slope float32, intercept float32, x float32) float32 {
 	return intercept + (slope * x)
 }
 
-func (ols OLS) calculateRSS(slope float32, intercept float32) (float32, error) {
+func (ols OLS) calculateRSS(intercept float32, slope float32) (float32, error) {
 
 	d := ols.ds
 
