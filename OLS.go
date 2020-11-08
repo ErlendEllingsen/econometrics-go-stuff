@@ -12,7 +12,7 @@ func (ols OLS) estimateSlope() (float32, error) {
 	d := ols.ds
 
 	if len(d.x) != len(d.y) {
-		return -1, errors.New("Unable to calculate covariance if slice length of both variables not equal")
+		return -1, errors.New("Unable to calculate ols slope valuee if slice length of both variables not equal")
 	}
 
 	meanX := d.x.calculateMean()
@@ -28,7 +28,7 @@ func (ols OLS) estimateSlope() (float32, error) {
 		numerator += ((elemX - meanX) * (elemY - meanY))
 		denominator += ((elemX - meanX) * (elemX - meanX))
 	}
-	slopeCoefficient := numerator / denominator // implementing COVARIANCE.P
+	slopeCoefficient := numerator / denominator
 	return slopeCoefficient, nil
 }
 
@@ -36,7 +36,7 @@ func (ols OLS) estimateIntercept() (float32, error) {
 	d := ols.ds
 
 	if len(d.x) != len(d.y) {
-		return -1, errors.New("Unable to calculate covariance if slice length of both variables not equal")
+		return -1, errors.New("Unable to calculate ols intercept if slice length of both variables not equal")
 	}
 
 	estimatedSlopeCoefficient, _ := ols.estimateSlope()
