@@ -18,3 +18,8 @@ reg <- lm(y ~ x)
 regSum <- summary(reg)
 
 rss <- sum(regSum$residuals^2)
+
+# R^2
+R2 = regSum$r.squared
+# Adjusted R^2
+R2_adj = regSum$adj.r.squared
