@@ -76,6 +76,12 @@ func (ols OLS) calculateRSS(intercept float32, slope float32) (float32, error) {
 
 }
 
+func (ols OLS) calculateStandardError(rss float32) float32 { // Calculates residual standard error (regression error)
+	d := ols.ds
+	T := float32(len(d.x)) // T = N (Num of obs)
+	return float32(math.Sqrt(float64(rss / (T - float32(2)))))
+}
+
 func (ols OLS) calculateRSquared(intercept float32, slope float32) (float32, error) {
 
 	d := ols.ds
@@ -117,4 +123,15 @@ func (ols OLS) calculateRSquaredAdjusted(rSquared float32) (float32, error) {
 
 	rssAdj := 1 - (((T - 1) / (T - k)) * (1 - rSquared))
 	return rssAdj, nil
+}
+
+func (ols OLS) calculateDF() float32 {
+	T := float32(len(ols.ds.x))
+	k := float32(2) // k = num est. coeff (2 for singular)
+	return float32(T - k)
+}
+
+func (ols OLS) calculateEstimatorStandardErrors() (alphaSE float32, betaSE float32) {
+	// TODO Implement
+	return -1, -1
 }

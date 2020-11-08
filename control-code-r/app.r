@@ -15,11 +15,21 @@ stats <- list(
 
 # Regression
 reg <- lm(y ~ x)
+  
+print(summary(reg))
+
 regSum <- summary(reg)
 
+# RSS
 rss <- sum(regSum$residuals^2)
 
+# SE 
+#se <- regSum$
+
 # R^2
-R2 = regSum$r.squared
+R2 <- regSum$r.squared
 # Adjusted R^2
-R2_adj = regSum$adj.r.squared
+R2_adj <- regSum$adj.r.squared
+
+# DF
+DF <- regSum$df[2]
