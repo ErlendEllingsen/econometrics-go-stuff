@@ -33,7 +33,8 @@ func main() {
 	slope, _ := ols.estimateSlope()
 	intercept, _ := ols.estimateIntercept()
 	rss, _ := ols.calculateRSS(intercept, slope)
-	se := ols.calculateStandardError(rss)
+	residualSe := ols.calculateStandardError(rss)
+	alphaSe, betaSe := ols.calculateEstimatorStandardErrors(residualSe)
 	rSquared, _ := ols.calculateRSquared(intercept, slope)
 	rSquaredAdj, _ := ols.calculateRSquaredAdjusted(rSquared)
 	dF := ols.calculateDF()
@@ -42,7 +43,9 @@ func main() {
 	fmt.Println("OLS intercept", intercept)
 
 	fmt.Println("OLS RSS", rss)
-	fmt.Println("OLS SE Residual", se)
+	fmt.Println("OLS SE Residual", residualSe)
+	fmt.Println("OLS Alpha SE", alphaSe)
+	fmt.Println("OLS Beta SE", betaSe)
 
 	fmt.Println("OLS R^2", rSquared)
 	fmt.Println("OLS R^2 ADJ", rSquaredAdj)

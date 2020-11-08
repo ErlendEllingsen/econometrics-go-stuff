@@ -131,7 +131,26 @@ func (ols OLS) calculateDF() float32 {
 	return float32(T - k)
 }
 
-func (ols OLS) calculateEstimatorStandardErrors() (alphaSE float32, betaSE float32) {
-	// TODO Implement
-	return -1, -1
+func (ols OLS) calculateEstimatorStandardErrors(residualStandardError float32) (alphaSE float32, betaSE float32) {
+
+	d := ols.ds
+	T := len(d.x)
+
+	// Calculate alpha SE
+	meanX := d.x.calculateMean()
+	xSumPowNominator := float32(0)
+	xSumDenominator := float32(0)
+	for i := 0; i < T; i++ {
+		elemX := float32(d.x[i])
+		xSumPowNominator += float32(math.Pow(float64(elemX), 2))
+		xSumDenominator += float32(math.Pow(float64(elemX-meanX), 2))
+	}
+
+	// alpha SE. Se Brooks, Chris, Introductory Econometrics for Finance 4th edition p. 110 for formulas
+	locAlphaSE := residualStandardError * float32(math.Sqrt(float64(xSumPowNominator/(float32(T)*xSumDenominator))))
+
+	// Calculate beta SE, partially same formula, so re-using some calculated vars
+	locBetaSE := residualStandardError * float32(math.Sqrt(float64(float32(1)/(xSumDenominator))))
+
+	return locAlphaSE, locBetaSE
 }
