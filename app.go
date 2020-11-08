@@ -25,4 +25,15 @@ func main() {
 	fmt.Println("Covariance ", cov)
 	fmt.Println("Correlation ", corr)
 
+	// OLS
+	ols := OLS{
+		ds: series,
+	}
+
+	slope, _ := ols.estimateSlope()
+	intercept, _ := ols.estimateIntercept()
+
+	fmt.Println("OLS slope", slope)
+	fmt.Println("OLS intercept", intercept)
+
 }
