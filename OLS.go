@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"math"
 )
 
 type OLS struct {
@@ -46,4 +47,31 @@ func (ols OLS) estimateIntercept() (float32, error) {
 
 	interceptCofficient := meanY - (estimatedSlopeCoefficient * meanX)
 	return interceptCofficient, nil
+}
+
+func (ols OLS) estimateY(slope float32, intercept float32, x float32) float32 {
+	return intercept + (slope * x)
+}
+
+func (ols OLS) calculateRSS(slope float32, intercept float32) (float32, error) {
+
+	d := ols.ds
+
+	if len(d.x) != len(d.y) {
+		return -1, errors.New("Unable to calculate RSS if slice length of both variables not equal")
+	}
+
+	rss := float32(0)
+
+	for i := 0; i < len(d.x); i++ {
+		elemX := float32(d.x[i])
+		elemY := float32(d.y[i])
+
+		estimatedY := ols.estimateY(slope, intercept, elemX)
+		squaredDist := float32(math.Pow(float64(elemY-estimatedY), 2))
+		rss += squaredDist
+	}
+
+	return rss, nil
+
 }
