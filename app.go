@@ -52,25 +52,25 @@ func main() {
 	fmt.Println("OLS DF", dF)
 
 	// -- Hypothesis testing --
-	cl := CLRM{
+	tt := TTest{
 		ols: ols,
 	}
 
 	// Test of Significance
-	tStat := cl.calculateTStat(0.5091, 0.2561, 1)
+	tStat := tt.calculateTStat(0.5091, 0.2561, 1)
 	fmt.Println("tStat", tStat)
 
 	// One sided test of significance (from the book)
 	tCritSingle := float32(1.724718243) // t20;5% (cuz one sided)
-	rejectStatusOneSided := cl.rejectTestOfSignificanceTestOneSided(tCritSingle, tStat, false)
+	rejectStatusOneSided := tt.rejectTestOfSignificanceTestOneSided(tCritSingle, tStat, false)
 
 	// Two sided test of significance (from the book)
 	tCritTwoTailed := float32(-2.086) // t20;5% / 2 (~ t;20;2.5%, cuz two sided) from t-table
-	rejectStatusTestOfSignificance := cl.rejectTestOfSignificanceTestTwoSided(tCritTwoTailed, tStat)
+	rejectStatusTestOfSignificance := tt.rejectTestOfSignificanceTestTwoSided(tCritTwoTailed, tStat)
 
 	// Confidence interval test
-	interval := cl.calculateConfidenceInterval(0.5091, 0.2561, tCritTwoTailed)
-	rejectStatusConfidenceIntervalTest := cl.rejectConfidenceIntervalTest(interval, 1)
+	interval := tt.calculateConfidenceInterval(0.5091, 0.2561, tCritTwoTailed)
+	rejectStatusConfidenceIntervalTest := tt.rejectConfidenceIntervalTest(interval, 1)
 	fmt.Println("Reject (Test of significance) H0 B>=1", rejectStatusOneSided)
 	fmt.Println("Reject (Test of significance, two sided) H0 B=1", rejectStatusTestOfSignificance)
 	fmt.Println("Confidence interval", interval)
