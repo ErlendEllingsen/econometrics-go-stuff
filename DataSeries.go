@@ -9,6 +9,11 @@ type Dataseries struct {
 	x NumberSequence
 }
 
+type DataseriesMulti struct {
+	y NumberSequence
+	x []NumberSequence
+}
+
 func (d Dataseries) calculateCoVariance() (float32, error) {
 	if len(d.x) != len(d.y) {
 		return -1, errors.New("Unable to calculate covariance if slice length of both variables not equal")

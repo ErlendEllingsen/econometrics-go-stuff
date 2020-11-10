@@ -5,7 +5,6 @@ Todo:
 * T-crit table func 
 * Hypothesis testing, F-test
 * Heteroskedasticity
-* Stop using uint32 lol wtf:)) 
 
 Done:
 * Singular Regression

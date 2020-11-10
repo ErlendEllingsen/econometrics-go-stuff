@@ -2,10 +2,10 @@ package main
 
 import "math"
 
-type NumberSequence []uint32
+type NumberSequence []int32
 
 func (ns NumberSequence) calculateMean() float32 {
-	sum := uint32(0)
+	sum := int32(0)
 	for _, v := range ns {
 		sum += v
 	}
