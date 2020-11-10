@@ -25,7 +25,7 @@ func main() {
 	fmt.Println("Covariance ", cov)
 	fmt.Println("Correlation ", corr)
 
-	// OLS
+	// -- Regression & OLS --
 	ols := OLS{
 		ds: series,
 	}
@@ -51,4 +51,19 @@ func main() {
 	fmt.Println("OLS R^2 ADJ", rSquaredAdj)
 	fmt.Println("OLS DF", dF)
 
+	// -- Hypothesis testing --
+	cl := CLRM{
+		ols: ols,
+	}
+	// Two sided test of significance (from the book)
+	tStat := cl.calculateTStat(0.5091, 0.2561, 1)
+	tCrit := float32(2.086) // t20;5% from t-table
+	rejectStatusTestOfSignificance := cl.rejectTestOfSignificanceTestTwoSided(tCrit, tStat)
+
+	// Confidence interval test
+	interval := cl.calculateConfidenceInterval(0.5091, 0.2561, tCrit)
+	rejectStatusConfidenceIntervalTest := cl.rejectConfidenceIntervalTest(interval, 1)
+
+	fmt.Println("Reject (Test of significance) H0 B=1", rejectStatusTestOfSignificance)
+	fmt.Println("Reject (Confidence interval test) H0 B=1", rejectStatusConfidenceIntervalTest)
 }
