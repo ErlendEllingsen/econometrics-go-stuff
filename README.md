@@ -2,7 +2,6 @@ Goal of project is to learn and do some basic econometrical statistics and imple
 
 Todo:
 * Multivariate Regression
-* Hypothesis testing, T-test
 * T-crit table func 
 * Hypothesis testing, F-test
 * Heteroskedasticity
@@ -10,3 +9,4 @@ Todo:
 
 Done:
 * Singular Regression
+* Hypothesis testing, T-test
