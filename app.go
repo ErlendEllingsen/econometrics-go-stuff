@@ -51,7 +51,7 @@ func main() {
 	fmt.Println("OLS R^2 ADJ", rSquaredAdj)
 	fmt.Println("OLS DF", dF)
 
-	// -- Hypothesis testing --
+	// -- T-TEST Hypothesis testing --
 	tt := TTest{
 		ols: ols,
 	}
@@ -75,4 +75,10 @@ func main() {
 	fmt.Println("Reject (Test of significance, two sided) H0 B=1", rejectStatusTestOfSignificance)
 	fmt.Println("Confidence interval", interval)
 	fmt.Println("Reject (Confidence interval test) H0 B=1", rejectStatusConfidenceIntervalTest)
+
+	// -- F-TEST Hypothesis testing --
+	ft := FTest{}
+	ftestTstat := ft.calculateTestStat(436.1, 397.2, 2, 144, 4)
+	fmt.Println("F-Test, tStat ", ftestTstat)
+
 }
