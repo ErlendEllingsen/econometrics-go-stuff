@@ -116,7 +116,31 @@ func (e Excercise1) proc() {
 	// todo tmrw:
 	// 1d -- Compute the correlation between the MSCI Germany index and the JP Morgan Germany government bond index.
 	// 1d-1 caclulate mean, stdev on both series (msci & gbi)
+	gbiSum := float64(0)
+	for i := 0; i < int(N); i++ {
+		gbiElem := series.gbiRet[i]
+		gbiSum += gbiElem
+	}
+	gbiMean := gbiSum / N
+
+	gbiVariancePool := float64(0)
+	for _, val := range series.gbiRet {
+		gbiVariancePool += math.Pow(val-gbiMean, 2)
+	}
+	gbiVariance := gbiVariancePool / N
+	gbiStandardDeviation := math.Sqrt(gbiVariance)
+
 	// 1d-2 caclulate covariance between msci & gbi: SUM((x - meanX)*(y - meanY))/N
+	coVarPool := float64(0)
+	for i := 0; i < int(N); i++ {
+		gbiElem := series.gbiRet[i]
+		msciElem := series.msciRet[i]
+		coVarPool += (msciElem - msciArithmeticMean) * (gbiElem - gbiMean)
+	}
+	coVar := coVarPool / N
+
 	// 1d-3 calculate corr: (COV(x,y)/(SDx * SDy))
+	correl := (coVar / (msciStandardDeviation * gbiStandardDeviation))
+	fmt.Println("1d msci gbi correlation ", correl)
 
 }
