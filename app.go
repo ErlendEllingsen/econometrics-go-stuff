@@ -61,11 +61,11 @@ func main() {
 	fmt.Println("tStat", tStat)
 
 	// One sided test of significance (from the book)
-	tCritSingle := float32(1.724718243) // t20;5% (cuz one sided)
+	tCritSingle := float64(1.724718243) // t20;5% (cuz one sided)
 	rejectStatusOneSided := tt.rejectTestOfSignificanceTestOneSided(tCritSingle, tStat, false)
 
 	// Two sided test of significance (from the book)
-	tCritTwoTailed := float32(-2.086) // t20;5% / 2 (~ t;20;2.5%, cuz two sided) from t-table
+	tCritTwoTailed := float64(-2.086) // t20;5% / 2 (~ t;20;2.5%, cuz two sided) from t-table
 	rejectStatusTestOfSignificance := tt.rejectTestOfSignificanceTestTwoSided(tCritTwoTailed, tStat)
 
 	// Confidence interval test

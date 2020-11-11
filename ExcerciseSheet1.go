@@ -176,4 +176,9 @@ func (e Excercise1) proc() {
 	fmt.Println("1e port mean ", portMean)
 	fmt.Println("1e port stdev ", portStandardDeviation)
 
+	//
+
+	//
+	// a := object{ x: []int32{0,1} }
+
 }

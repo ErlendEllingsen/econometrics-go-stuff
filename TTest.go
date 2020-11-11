@@ -9,30 +9,30 @@ type TTest struct {
 }
 
 type ConfidenceInterval struct {
-	start float32
-	stop  float32
+	start float64
+	stop  float64
 }
 
-func (tt TTest) calculateTStat(betaEst float32, betaEstSE float32, betaHypZero float32) float32 {
+func (tt TTest) calculateTStat(betaEst float64, betaEstSE float64, betaHypZero float64) float64 {
 	return (betaEst - betaHypZero) / betaEstSE
 }
 
-func (tt TTest) rejectTestOfSignificanceTestTwoSided(critValue float32, tStat float32) bool {
-	upper := float32(math.Abs(float64(critValue)))
+func (tt TTest) rejectTestOfSignificanceTestTwoSided(critValue float64, tStat float64) bool {
+	upper := float64(math.Abs(float64(critValue)))
 	lower := upper * -1
 	inNonRejectionZone := (lower < tStat) && (tStat < upper)
 	return !inNonRejectionZone
 }
 
-func (tt TTest) rejectTestOfSignificanceTestOneSided(critValue float32, tStat float32, leftTail bool) bool {
+func (tt TTest) rejectTestOfSignificanceTestOneSided(critValue float64, tStat float64, leftTail bool) bool {
 	if leftTail {
 		return tStat <= critValue
 	}
 	return critValue <= tStat
 }
 
-func (tt TTest) calculateConfidenceInterval(betaEst float32, betaEstSE float32, tCrit float32) ConfidenceInterval {
-	tCritAbs := float32(math.Abs(float64(tCrit)))
+func (tt TTest) calculateConfidenceInterval(betaEst float64, betaEstSE float64, tCrit float64) ConfidenceInterval {
+	tCritAbs := float64(math.Abs(float64(tCrit)))
 	locStart := betaEst - (tCritAbs * betaEstSE)
 	locEnd := betaEst + (tCritAbs * betaEstSE)
 	return ConfidenceInterval{
@@ -41,7 +41,7 @@ func (tt TTest) calculateConfidenceInterval(betaEst float32, betaEstSE float32, 
 	}
 }
 
-func (tt TTest) rejectConfidenceIntervalTest(interval ConfidenceInterval, betaHypZero float32) bool {
+func (tt TTest) rejectConfidenceIntervalTest(interval ConfidenceInterval, betaHypZero float64) bool {
 	withinInterval := (interval.start <= betaHypZero) && (betaHypZero <= interval.stop)
 	return !withinInterval
 }

@@ -14,7 +14,7 @@ type DataseriesMulti struct {
 	x []NumberSequence
 }
 
-func (d Dataseries) calculateCoVariance() (float32, error) {
+func (d Dataseries) calculateCoVariance() (float64, error) {
 	if len(d.x) != len(d.y) {
 		return -1, errors.New("Unable to calculate covariance if slice length of both variables not equal")
 	}
@@ -23,12 +23,12 @@ func (d Dataseries) calculateCoVariance() (float32, error) {
 	meanY := d.y.calculateMean()
 
 	// Start building the mathematics formula
-	numerator := float32(0) // to be calclated
-	denominator := float32(len(d.x))
+	numerator := float64(0) // to be calclated
+	denominator := float64(len(d.x))
 
 	for i := 0; i < int(denominator); i++ {
-		elemX := float32(d.x[i])
-		elemY := float32(d.y[i])
+		elemX := float64(d.x[i])
+		elemY := float64(d.y[i])
 		numerator += ((elemX - meanX) * (elemY - meanY))
 	}
 
@@ -36,7 +36,7 @@ func (d Dataseries) calculateCoVariance() (float32, error) {
 	return covariance, nil
 }
 
-func (d Dataseries) calculateCorrelation() (float32, error) {
+func (d Dataseries) calculateCorrelation() (float64, error) {
 	cov, err := d.calculateCoVariance()
 	if err != nil {
 		return -1, errors.New("Unable to calculate correlation if slice length of both variables not equal")

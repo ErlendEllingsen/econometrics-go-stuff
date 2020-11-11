@@ -4,14 +4,14 @@ type OLSMultivariate struct {
 	ds DataseriesMulti
 }
 
-func (ols OLSMultivariate) estimateSlopeValues() (float32, error) {
+func (ols OLSMultivariate) estimateSlopeValues() (float64, error) {
 	return -1, nil
 }
 
-func (ols OLSMultivariate) estimateIntercept() (float32, error) {
+func (ols OLSMultivariate) estimateIntercept() (float64, error) {
 	return -1, nil
 }
 
-func (ols OLSMultivariate) estimateY(intercept float32, slopeValuesMultipliedByX []float32) float32 {
+func (ols OLSMultivariate) estimateY(intercept float64, slopeValuesMultipliedByX []float64) float64 {
 	return -1
 }
