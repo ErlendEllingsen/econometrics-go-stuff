@@ -8,4 +8,7 @@ func (ft FTest) calculateTestStat(rrss float32, urss float32, m float32, T, k fl
 	return ((rrss - urss) / m) / (urss / (T - k))
 }
 
-// TODO: Implement me
+
+func (ft FTest) rejectFTest(critValue float32, fTestStat float32) bool {
+	return fTestStat > critValue
+}

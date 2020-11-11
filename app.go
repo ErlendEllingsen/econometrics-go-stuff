@@ -79,6 +79,10 @@ func main() {
 	// -- F-TEST Hypothesis testing --
 	ft := FTest{}
 	ftestTstat := ft.calculateTestStat(436.1, 397.2, 2, 144, 4)
-	fmt.Println("F-Test, tStat ", ftestTstat)
+	fmt.Println("F-Test, testStat ", ftestTstat)
 
+	// Excercise sheets
+	fmt.Println("---- EXCERCISE SHEETS ----")
+	ex1 := Excercise1{}
+	ex1.proc()
 }
