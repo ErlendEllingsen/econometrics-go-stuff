@@ -143,4 +143,37 @@ func (e Excercise1) proc() {
 	correl := (coVar / (msciStandardDeviation * gbiStandardDeviation))
 	fmt.Println("1d msci gbi correlation ", correl)
 
+	// task 1e)
+	// Calculate the arithmetic mean return and the standard deviation on a portfolio with
+	// 60% invested in the MSCI Germany index and 40% invested in the JP Morgan Germany
+	// government bond index.
+	// Construct port. slice
+	portfolioSlice := []float64{} // make([]float64, len(series.msciRet))
+
+	for i := 0; i < int(N); i++ {
+		gbiElem := series.gbiRet[i]
+		msciElem := series.msciRet[i]
+		combinedRet := (msciElem * 0.6) + (gbiElem * 0.4)
+		portfolioSlice = append(portfolioSlice, combinedRet)
+	}
+
+	// Calculate mean
+	portMeanPool := float64(0)
+	for _, v := range portfolioSlice {
+		portMeanPool += v
+	}
+
+	portMean := portMeanPool / float64(N)
+
+	// Calculate var and stdev
+	portVariancePool := float64(0)
+	for _, v := range portfolioSlice {
+		portVariancePool += math.Pow(v-portMean, 2)
+	}
+	portVariance := portVariancePool / N
+	portStandardDeviation := math.Sqrt(portVariance)
+
+	fmt.Println("1e port mean ", portMean)
+	fmt.Println("1e port stdev ", portStandardDeviation)
+
 }
